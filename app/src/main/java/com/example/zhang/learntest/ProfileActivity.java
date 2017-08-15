@@ -1,6 +1,8 @@
 package com.example.zhang.learntest;
 
 import android.app.Activity;
+import android.content.res.Resources;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
@@ -37,8 +39,12 @@ public class ProfileActivity extends Activity {
         webSite = (TextView)findViewById(R.id.website);
         onlineStatus = (TextView)findViewById(R.id.online_status);
         description = (EditText)findViewById(R.id.description);
+        profileImage = (ImageView)findViewById(R.id.profile_image);
+
+
 
         int profileImageId = getIntent().getIntExtra(IMAGE,-1);
+
         profileImage.setImageDrawable(getResources().getDrawable(profileImageId));
         name.setText(getIntent().getStringExtra(NAME));
         location.setText(getIntent().getStringExtra(LOCATION));
@@ -53,7 +59,7 @@ public class ProfileActivity extends Activity {
         webSite.setTextAppearance(this,android.R.style.TextAppearance_DeviceDefault_Inverse);
         onlineStatus.setTextAppearance(this,android.R.style.TextAppearance_DeviceDefault_Inverse);
         description.setEnabled(false);
-        description.setBackgroundColor(getResources().getColor(android.R.color.black));
+        description.setBackgroundColor(getResources().getColor(android.R.color.white));
 
     }
 }

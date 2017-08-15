@@ -17,5 +17,6 @@ class Person {
         this.location = location;
         this.website = website;
         this.descr = descr;
+        this.image = image;
     }
 }
