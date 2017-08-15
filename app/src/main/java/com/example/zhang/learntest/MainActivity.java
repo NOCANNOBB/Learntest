@@ -2,11 +2,13 @@ package com.example.zhang.learntest;
 
 import android.app.ListActivity;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ListView;
 import android.widget.TextView;
 
 public class MainActivity extends ListActivity {
@@ -17,14 +19,35 @@ public class MainActivity extends ListActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.list_view);
         Person[] listItems = new Person[]{
-                new Person("Nary","www.allmybuddies.com/mary"),
-                new Person("Joseph","www.allmybuddies.com/Joseph"),
-                new Person("Leah","www.allmybuddies.com/Leah"),
-                new Person("Mark","www.allmybuddies.com/Mark")
+                new Person(R.drawable.mary,"Nary","New York","www.allmybuddies.com/mary","Avid cook,writes poetry"),
+                new Person(R.drawable.joseph,"Joseph","Virginia","www.allmybuddies.com/Joseph","Author of servral novels"),
+                new Person(R.drawable.leah,"Leah","North Carolina","www.allmybuddies.com/Leah","Baseketball superstar. Rock climber."),
+                new Person(R.drawable.mark,"Mark","Denver","www.allmybuddies.com/Mark","Established chemical scientist with several patents.")
 
         };
-        setListAdapter(new PersonAdapter(this,android.R.layout.activity_list_item,listItems));
+        setListAdapter(new PersonAdapter(this,android.R.layout.simple_list_item_2,listItems));
+
+
+
     }
+
+    @Override
+    protected  void onListItemClick(ListView l, View v, int position, long id){
+        super.onListItemClick(l,v,position,id);
+
+        Person person = (Person)l.getItemAtPosition(position);
+
+
+        Intent intent = new Intent(this,ProfileActivity.class);
+        intent.putExtra(ProfileActivity.IMAGE,person.image);
+        intent.putExtra(ProfileActivity.NAME,person.name);
+        intent.putExtra(ProfileActivity.LOCATION,person.location);
+        intent.putExtra(ProfileActivity.WEBSITE,person.website);
+        intent.putExtra(ProfileActivity.DESCRIPTION,person.descr);
+
+        startActivity(intent);
+    }
+
 
 
     public class PersonAdapter extends BaseAdapter {
@@ -69,5 +92,7 @@ public class MainActivity extends ListActivity {
             text2.setText(listItems[position].website);
             return  view;
         }
+
+
     }
 }
